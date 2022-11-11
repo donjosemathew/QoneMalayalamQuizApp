@@ -18,7 +18,16 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { ScrollView } from "react-native-gesture-handler";
 
 export default function DashboardScreen() {
-  const data = ["a", "b", "c", "d"];
+  const data = [
+    {
+      color: "#3FE0AE",
+      text: "When building your own native code,",
+    },
+    {
+      color: "#F78E1E",
+      text: "When building your own native code,",
+    },
+  ];
   return (
     <SafeAreaView
       style={{
@@ -68,7 +77,7 @@ export default function DashboardScreen() {
             fontSize: RFValue(45),
 
             letterSpacing: -2.8,
-            fontFamily: "DMsans",
+            fontFamily: "DMSansBold",
             color: "#2D2E31",
           }}
         >
@@ -80,7 +89,7 @@ export default function DashboardScreen() {
             marginTop: -20,
             color: "#fff",
             letterSpacing: -2.5,
-            fontFamily: "DMSansBold",
+            fontFamily: "DMsans",
             color: "#2D2E31",
           }}
         >
@@ -175,127 +184,68 @@ export default function DashboardScreen() {
         style={{
           height: Dimensions.get("window").height * 0.28,
           justifyContent: "center",
-          marginTop: 15,
         }}
       >
         <ScrollView
           showsHorizontalScrollIndicator={false}
           style={{
-            height: Dimensions.get("window").height * 0.25,
+            marginTop: 15,
           }}
           contentContainerStyle={{
             alignItems: "center",
           }}
           horizontal
         >
-          <View
-            style={{
-              marginRight: 30,
-              width: "100%",
-              height: Dimensions.get("window").height * 0.28,
-              width: Dimensions.get("window").width * 0.5,
-              backgroundColor: "#F78E1E",
-              marginTop: 30,
-              padding: 20,
-              position: "relative",
-              justifyContent: "flex-end",
-              flexDirection: "column",
-            }}
-          >
-            <Text
-              style={{
-                fontFamily: "DMsans",
-                fontSize: RFValue(23),
-                lineHeight: 27,
-                color: "#fff",
-              }}
-            >
-              When building your own native code,
-            </Text>
-            <TouchableOpacity
-              style={{
-                backgroundColor: "rgba(255, 255, 255, 0.5)",
-                width: "70%",
-                marginTop: 7,
-                padding: 12,
-                borderRadius: 1000,
-                paddingHorizontal: 40,
-                marginBottom: 10,
-              }}
-            ></TouchableOpacity>
-          </View>
-          <View
-            style={{
-              width: "100%",
-              marginRight: 30,
-              height: Dimensions.get("window").height * 0.28,
-              width: Dimensions.get("window").width * 0.5,
-              backgroundColor: "#3FE0AE",
-              marginTop: 30,
-              padding: 20,
-              position: "relative",
-              justifyContent: "flex-end",
-              flexDirection: "column",
-            }}
-          >
-            <Text
-              style={{
-                fontFamily: "DMsans",
-                fontSize: RFValue(23),
-                lineHeight: 27,
-                color: "#fff",
-              }}
-            >
-              When building your own native code,
-            </Text>
-            <TouchableOpacity
-              style={{
-                backgroundColor: "rgba(255, 255, 255, 0.5)",
-                width: "70%",
-                marginTop: 7,
-                padding: 12,
-                borderRadius: 1000,
-                paddingHorizontal: 40,
-                marginBottom: 10,
-              }}
-            ></TouchableOpacity>
-          </View>
-          <View
-            style={{
-              width: "100%",
-              height: Dimensions.get("window").height * 0.28,
-              width: Dimensions.get("window").width * 0.5,
-              backgroundColor: "#5C62FB",
-              marginTop: 30,
-              padding: 20,
-              marginRight: 30,
-              position: "relative",
-              justifyContent: "flex-end",
-              flexDirection: "column",
-            }}
-          >
-            <Text
-              style={{
-                fontFamily: "DMsans",
-                fontSize: RFValue(23),
-                lineHeight: 27,
-                color: "#fff",
-              }}
-            >
-              When building your own native code,
-            </Text>
-            <TouchableOpacity
-              style={{
-                backgroundColor: "rgba(255, 255, 255, 0.5)",
-                width: "70%",
-                marginTop: 7,
-                padding: 12,
-                borderRadius: 1000,
-                paddingHorizontal: 40,
-                marginBottom: 10,
-              }}
-            ></TouchableOpacity>
-          </View>
+          {data.map((item, i) => {
+            return (
+              <View
+                key={i}
+                style={{
+                  marginRight: 30,
+                  width: "100%",
+                  height: Dimensions.get("window").height * 0.28,
+                  width: Dimensions.get("window").width * 0.5,
+                  backgroundColor: item.color,
+                  marginTop: 0,
+                  padding: 20,
+                  position: "relative",
+                  justifyContent: "flex-end",
+                  flexDirection: "column",
+                }}
+              >
+                <Text
+                  style={{
+                    fontFamily: "DMsans",
+                    fontSize: RFValue(23),
+                    lineHeight: 27,
+                    color: "#fff",
+                  }}
+                >
+                  {item.text}
+                </Text>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: "rgba(255, 255, 255, 0.3)",
+
+                    marginTop: 7,
+                    width: 50,
+                    height: 50,
+                    borderRadius: 1000,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginBottom: 10,
+                  }}
+                >
+                  <Icon
+                    name="arrow-forward-outline"
+                    type="ionicon"
+                    color="#FFF"
+                    size={30}
+                  />
+                </TouchableOpacity>
+              </View>
+            );
+          })}
         </ScrollView>
       </View>
     </SafeAreaView>
