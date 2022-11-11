@@ -15,7 +15,7 @@ import componentStyles from "../styles/component";
 export default function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <StatusBar style="auto" />
+      <StatusBar color="transparent" style="inverted" />
       <LinearGradient
         locations={[0, 1]}
         colors={["#19ABFB", "#586FEC"]}
@@ -80,28 +80,62 @@ export default function HomeScreen() {
         </View>
         <View style={componentStyles.page}>
           <Text style={fontStyles.question}>
-            ആധുനിക മലയാള സാഹിത്യത്തിന്റെ പിതാവായി അറിയപ്പെടുന്നത്?
+            ഭിന്നലിംഗക്കാര്‍ക്കായി പ്രേത്യേക നയമുണ്ടാക്കിയ ആദ്യ സംസ്ഥാനം
           </Text>
 
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#fff",
-              padding: 16,
-              shadowColor: "rgba(0, 0, 0, 0.64)",
-              borderRadius: 5,
-              marginTop: 10,
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
-
-              elevation: 5,
-            }}
-          >
-            <Text style={fontStyles.option}>ആധുനിക മലയാള</Text>
+          <TouchableOpacity style={componentStyles.optionButton}>
+            <LinearGradient
+              locations={[0, 0.7]}
+              colors={["rgba(25, 171, 251, 1)", "rgba(88, 111, 236, 1)"]}
+              useAngle={true}
+              angle={20}
+              style={componentStyles.optionGradient}
+            >
+              <Text style={fontStyles.optionPos}>A</Text>
+            </LinearGradient>
+            <Text style={fontStyles.optiontext}>സിക്കിം </Text>
           </TouchableOpacity>
+          <TouchableOpacity style={componentStyles.optionButton}>
+            <LinearGradient
+              locations={[0, 0.7]}
+              colors={["rgba(25, 171, 251, 1)", "rgba(88, 111, 236, 1)"]}
+              useAngle={true}
+              angle={20}
+              style={componentStyles.optionGradient}
+            >
+              <Text style={fontStyles.optionPos}>B</Text>
+            </LinearGradient>
+            <Text style={fontStyles.optiontext}>മേഘാലയ </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={componentStyles.optionButton}>
+            <LinearGradient
+              locations={[0, 0.7]}
+              colors={["rgba(25, 171, 251, 1)", "rgba(88, 111, 236, 1)"]}
+              useAngle={true}
+              angle={20}
+              style={componentStyles.optionGradient}
+            >
+              <Text style={fontStyles.optionPos}>C</Text>
+            </LinearGradient>
+            <Text style={fontStyles.optiontext}>കേരളം </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={componentStyles.optionButton}>
+            <LinearGradient
+              locations={[0, 0.7]}
+              colors={["rgba(25, 171, 251, 1)", "rgba(88, 111, 236, 1)"]}
+              useAngle={true}
+              angle={20}
+              style={componentStyles.optionGradient}
+            >
+              <Text style={fontStyles.optionPos}>D</Text>
+            </LinearGradient>
+            <Text style={fontStyles.optiontext}>അസ്സം </Text>
+          </TouchableOpacity>
+          <View
+            style={{
+              height: "10%",
+            }}
+          />
         </View>
       </LinearGradient>
     </View>
