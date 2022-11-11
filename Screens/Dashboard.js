@@ -46,7 +46,7 @@ export default function DashboardScreen() {
           flexDirection: "row",
           justifyContent: "space-between",
           width: "100%",
-          marginTop: StatusBar2.currentHeight + 5,
+          marginTop: StatusBar2.currentHeight + 7,
         }}
       >
         <Icon

@@ -3,9 +3,8 @@ import { Dimensions } from "react-native";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 const fontStyles = StyleSheet.create({
   question: {
-    textAlign: "left",
-    fontSize: 22,
-
+    textAlign: "center",
+    fontSize: RFValue(18),
     fontWeight: "500",
     color: "#fff",
     fontFamily: "MalayalamFont",

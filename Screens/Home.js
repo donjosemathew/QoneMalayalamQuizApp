@@ -5,6 +5,8 @@ import {
   StyleSheet,
   Text,
   View,
+  StatusBar as StatusBar2,
+  SafeAreaView,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
@@ -14,21 +16,21 @@ import componentStyles from "../styles/component";
 
 export default function HomeScreen() {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <SafeAreaView
+      style={{ flex: 1, alignItems: "center", backgroundColor: "#fff" }}
+    >
       <StatusBar color="transparent" style="inverted" />
-      <LinearGradient
-        locations={[0, 1]}
-        colors={["#19ABFB", "#586FEC"]}
-        useAngle={true}
-        angle={45}
-        style={componentStyles.bgGradient}
+
+      <View
+        style={{
+          backgroundColor: "#5C62FB",
+          paddingHorizontal: 20,
+          height: Dimensions.get("window").height * 0.4,
+        }}
       >
         <View
           style={{
-            position: "absolute",
-            top: 50,
-
-            flex: 1,
+            marginTop: StatusBar2.currentHeight + 7,
             width: "100%",
             flexDirection: "row",
             justifyContent: "space-between",
@@ -78,66 +80,32 @@ export default function HomeScreen() {
             </View>
           </View>
         </View>
-        <View style={componentStyles.page}>
-          <Text style={fontStyles.question}>
-            ഭിന്നലിംഗക്കാര്‍ക്കായി പ്രേത്യേക നയമുണ്ടാക്കിയ ആദ്യ സംസ്ഥാനം
-          </Text>
+        <View
+          style={{
+            flex: 1,
 
-          <TouchableOpacity style={componentStyles.optionButton}>
-            <LinearGradient
-              locations={[0, 0.7]}
-              colors={["rgba(25, 171, 251, 1)", "rgba(88, 111, 236, 1)"]}
-              useAngle={true}
-              angle={20}
-              style={componentStyles.optionGradient}
-            >
-              <Text style={fontStyles.optionPos}>A</Text>
-            </LinearGradient>
-            <Text style={fontStyles.optiontext}>സിക്കിം </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={componentStyles.optionButton}>
-            <LinearGradient
-              locations={[0, 0.7]}
-              colors={["rgba(25, 171, 251, 1)", "rgba(88, 111, 236, 1)"]}
-              useAngle={true}
-              angle={20}
-              style={componentStyles.optionGradient}
-            >
-              <Text style={fontStyles.optionPos}>B</Text>
-            </LinearGradient>
-            <Text style={fontStyles.optiontext}>മേഘാലയ </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={componentStyles.optionButton}>
-            <LinearGradient
-              locations={[0, 0.7]}
-              colors={["rgba(25, 171, 251, 1)", "rgba(88, 111, 236, 1)"]}
-              useAngle={true}
-              angle={20}
-              style={componentStyles.optionGradient}
-            >
-              <Text style={fontStyles.optionPos}>C</Text>
-            </LinearGradient>
-            <Text style={fontStyles.optiontext}>കേരളം </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={componentStyles.optionButton}>
-            <LinearGradient
-              locations={[0, 0.7]}
-              colors={["rgba(25, 171, 251, 1)", "rgba(88, 111, 236, 1)"]}
-              useAngle={true}
-              angle={20}
-              style={componentStyles.optionGradient}
-            >
-              <Text style={fontStyles.optionPos}>D</Text>
-            </LinearGradient>
-            <Text style={fontStyles.optiontext}>അസ്സം </Text>
-          </TouchableOpacity>
-          <View
-            style={{
-              height: "10%",
-            }}
-          />
+            justifyContent: "center",
+          }}
+        >
+          <Text style={fontStyles.question}>
+            ഭരണഘടന അനുവദിച്ചിരിക്കുന്ന മൗലികാവകാശങ്ങൾ എത്ര
+          </Text>
         </View>
-      </LinearGradient>
-    </View>
+      </View>
+      <View style={componentStyles.page}>
+        <TouchableOpacity style={componentStyles.optionButton}>
+          <View style={componentStyles.optionGradient}>
+            <Text style={fontStyles.optionPos}>A</Text>
+          </View>
+          <Text style={fontStyles.optiontext}>സിക്കിം </Text>
+        </TouchableOpacity>
+
+        <View
+          style={{
+            height: "10%",
+          }}
+        />
+      </View>
+    </SafeAreaView>
   );
 }

@@ -4,7 +4,7 @@ const componentStyles = StyleSheet.create({
   bgGradient: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "flex-end",
+
     width: Dimensions.get("window").width,
     padding: 20,
   },
@@ -21,15 +21,17 @@ const componentStyles = StyleSheet.create({
   optionGradient: {
     width: 50,
     height: 50,
-
-    borderRadius: 25,
+    backgroundColor: "#5C62FB",
+    borderRadius: 250,
     alignItems: "center",
     justifyContent: "center",
     marginRight: 7,
   },
   page: {
-    padding: 1,
+    padding: 20,
     width: "100%",
+    backgroundColor: "#FAFAFA",
+    flex: 1,
   },
   roundedItem: {
     alignItems: "center",
@@ -58,17 +60,10 @@ const componentStyles = StyleSheet.create({
   optionButton: {
     backgroundColor: "#fff",
     padding: 8,
-    shadowColor: "rgba(0, 0, 0, 0.64)",
+
     borderRadius: 6,
     marginTop: 16,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
 
-    elevation: 5,
     flexDirection: "row",
     alignItems: "center",
   },
