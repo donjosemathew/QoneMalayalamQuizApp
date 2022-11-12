@@ -27,7 +27,8 @@ export default function App() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="Home" component={DashboardScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Dashboard" component={DashboardScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

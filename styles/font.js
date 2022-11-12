@@ -25,7 +25,8 @@ const fontStyles = StyleSheet.create({
     color: "#fff",
   },
   optiontext: {
-    fontSize: RFValue(15),
+    fontSize: RFValue(17),
+    marginLeft: 10,
     fontFamily: "MalayalamFont",
     color: " rgba(0, 0, 0, 0.74)",
     letterSpacing: -1,

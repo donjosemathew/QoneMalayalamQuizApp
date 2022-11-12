@@ -59,8 +59,10 @@ const componentStyles = StyleSheet.create({
   },
   optionButton: {
     backgroundColor: "#fff",
-    padding: 8,
+    padding: 10,
+    shadowColor: "rgba(92, 98, 251, 0.26)",
 
+    elevation: 8,
     borderRadius: 6,
     marginTop: 16,
 

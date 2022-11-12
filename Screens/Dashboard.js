@@ -8,6 +8,7 @@ import {
   Image,
   SafeAreaView,
   StatusBar as StatusBar2,
+  ScrollView,
 } from "react-native";
 import { Icon } from "@rneui/themed";
 import { LinearGradient } from "expo-linear-gradient";
@@ -15,9 +16,8 @@ import { StatusBar } from "expo-status-bar";
 import fontStyles from "../styles/font";
 import componentStyles from "../styles/component";
 import { RFValue } from "react-native-responsive-fontsize";
-import { ScrollView } from "react-native-gesture-handler";
 
-export default function DashboardScreen() {
+export default function DashboardScreen({ navigation }) {
   const data = [
     {
       color: "#3FE0AE",
@@ -28,6 +28,10 @@ export default function DashboardScreen() {
       text: "When building your own native code,",
     },
   ];
+  ///Move to game screen
+  const gameWindow = () => {
+    navigation.navigate("Home");
+  };
   return (
     <SafeAreaView
       style={{
@@ -127,6 +131,7 @@ export default function DashboardScreen() {
           When building your own native code,
         </Text>
         <TouchableOpacity
+          onPress={gameWindow}
           style={{
             backgroundColor: "rgba(255, 255, 255, 0.5)",
             width: "70%",
