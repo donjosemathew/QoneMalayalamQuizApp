@@ -16,6 +16,7 @@ import fontStyles from "../styles/font";
 import componentStyles from "../styles/component";
 import { useEffect } from "react";
 import { useState } from "react";
+import { RFValue } from "react-native-responsive-fontsize";
 
 export default function HomeScreen({ navigation }) {
   ///Move to home
@@ -29,13 +30,32 @@ export default function HomeScreen({ navigation }) {
   ///load random question
   /////
   const [score, setScore] = useState(0);
+  const [timer, setTimer] = useState(15);
   const [life, setLife] = useState(5);
-  useEffect(() => {
-    setInterval(() => {
-      setScore(score + 1);
-    }, 100);
-  }, [life]);
+  const [newQues, setNewQues] = useState(0);
 
+  const [counter, setCounter] = useState(20);
+  const [startCountdown, setStartCountdown] = useState(false);
+  useEffect(() => {
+    if (startCountdown) {
+      const timer =
+        counter > 0 && setInterval(() => setCounter(counter - 1), 100);
+
+      if (counter === 0) {
+        // countdown is finished
+        setStartCountdown(false);
+        // update your redux state here
+        // updateReduxCounter(0);
+      }
+
+      return () => clearInterval(timer);
+    }
+  }, [counter, startCountdown]);
+  const newQuestion = () => {
+    console.log("sds");
+    setCounter(20);
+    setStartCountdown(true);
+  };
   return (
     <SafeAreaView
       style={{ flex: 1, alignItems: "center", backgroundColor: "#fff" }}
@@ -78,16 +98,25 @@ export default function HomeScreen({ navigation }) {
             }}
           >
             <CircularProgress
-              value={score}
+              value={counter}
               radius={35}
-              duration={2000}
+              duration={10}
               progressValueColor={"#ecf0f1"}
               maxValue={20}
+              activeStrokeSecondaryColor={"#C25AFF"}
               inActiveStrokeColor={"rgba(255, 255, 255, 0.64)"}
               titleColor={"white"}
               titleStyle={{ fontWeight: "bold" }}
               activeStrokeWidth={5}
+              title={"" + score}
               inActiveStrokeWidth={5}
+              titleStyle={{
+                fontSize: RFValue(20),
+                fontFamily: "DMBold",
+              }}
+              progressValueStyle={{
+                display: "none",
+              }}
             />
           </View>
           <View
@@ -118,12 +147,15 @@ export default function HomeScreen({ navigation }) {
           }}
         >
           <Text style={fontStyles.question}>
-            ഭരണഘടന അനുവദിച്ചിരിക്കുന്ന മൗലികാവകാശങ്ങൾ എത്ര
+            ഭരണഘടന അനുവദിച്ചിരിക്കുന്ന മൗലികാവകാശങ്ങൾ എത്ര{score}
           </Text>
         </View>
       </View>
       <View style={componentStyles.page}>
-        <TouchableOpacity style={componentStyles.optionButton}>
+        <TouchableOpacity
+          onPress={newQuestion}
+          style={componentStyles.optionButton}
+        >
           <View style={componentStyles.optionGradient}>
             <Text style={fontStyles.optionPos}>A</Text>
           </View>
