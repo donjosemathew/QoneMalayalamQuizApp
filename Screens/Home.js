@@ -15,10 +15,10 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Icon } from "react-native-elements";
 import fontStyles from "../styles/font";
 import componentStyles from "../styles/component";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { RFValue } from "react-native-responsive-fontsize";
-
+import LottieView from "lottie-react-native";
 export default function HomeScreen({ navigation }) {
   ///Move to home
   const backToHome = () => {
@@ -46,7 +46,7 @@ export default function HomeScreen({ navigation }) {
       optionb: "സിക്കിം",
       optionc: "സിക്കിം",
       optiond: "സിക്കിം",
-      answer: "a",
+      answer: "b",
     },
     {
       question: "ഭരണഘടന അനുവദിച്ചിരിക്കുന്ന മൗലികാവകാശങ്ങൾ എത്ര3",
@@ -54,7 +54,7 @@ export default function HomeScreen({ navigation }) {
       optionb: "സിക്കിം",
       optionc: "സിക്കിം",
       optiond: "സിക്കിം",
-      answer: "a",
+      answer: "c",
     },
     {
       question: "ഭരണഘടന അനുവദിച്ചിരിക്കുന്ന മൗലികാവകാശങ്ങൾ എത്ര4",
@@ -62,7 +62,7 @@ export default function HomeScreen({ navigation }) {
       optionb: "സിക്കിം",
       optionc: "സിക്കിം",
       optiond: "സിക്കിം",
-      answer: "a",
+      answer: "d",
     },
     {
       question: "ഭരണഘടന അനുവദിച്ചിരിക്കുന്ന മൗലികാവകാശങ്ങൾ എത്ര5",
@@ -77,7 +77,6 @@ export default function HomeScreen({ navigation }) {
   const [score, setScore] = useState(0);
 
   const [life, setLife] = useState(5);
-  const [newQues, setNewQues] = useState(0);
 
   const [counter, setCounter] = useState(30); ///timer variable
   const [startCountdown, setStartCountdown] = useState(false); //select reset
@@ -104,19 +103,29 @@ export default function HomeScreen({ navigation }) {
   };
   const newQuestion = () => {
     console.log("sds");
+    setOptionSelected("");
+    setQuestion();
     getaRandomQuestion();
     setCounter(33);
 
     setStartCountdown(true);
   };
   //////mark answer
-
+  const [optionSelected, setOptionSelected] = useState("");
   const markAnswer = (value) => {
+    setOptionSelected(value);
     setStartCountdown(false);
     console.log(value);
     if (value == question.answer) {
     }
   };
+
+  ////Load question initially
+  useEffect(() => {
+    newQuestion();
+  }, []);
+
+  const animation = useRef(null);
   return (
     <SafeAreaView
       style={{ flex: 1, alignItems: "center", backgroundColor: "#fff" }}
@@ -214,36 +223,112 @@ export default function HomeScreen({ navigation }) {
           )}
         </View>
       </View>
-
+      <View
+        style={{
+          position: "absolute",
+          zIndex: 100,
+          bottom: 0,
+        }}
+      >
+        <LottieView
+          autoPlay
+          ref={animation}
+          style={{
+            width: 200,
+            height: 200,
+            backgroundColor: "#F4433600",
+          }}
+          // Find more Lottie files at https://lottiefiles.com/featured
+          source={require("../assets/layer.json")}
+        />
+      </View>
       {question ? (
         <View style={componentStyles.page}>
           <TouchableOpacity
+            disabled={optionSelected}
             onPress={() => {
               markAnswer("a");
             }}
-            style={componentStyles.optionButton}
+            style={{
+              ...componentStyles.optionButton,
+              borderRightWidth:
+                optionSelected == "a" || question.answer == "a" ? 10 : 0,
+
+              borderColor:
+                optionSelected && question.answer == "a"
+                  ? "rgba(100, 221, 23, 0.62)"
+                  : optionSelected == "a"
+                  ? "rgba(244, 67, 54, 0.62)"
+                  : "rgba(244, 67, 54, 0)",
+            }}
           >
             <View style={componentStyles.optionGradient}>
               <Text style={fontStyles.optionPos}>A</Text>
             </View>
             <Text style={fontStyles.optiontext}>{question.optiona} </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={componentStyles.optionButton}>
+          <TouchableOpacity
+            disabled={optionSelected}
+            onPress={() => {
+              markAnswer("b");
+            }}
+            style={{
+              ...componentStyles.optionButton,
+              borderRightWidth:
+                optionSelected == "b" || question.answer == "b" ? 10 : 0,
+
+              borderColor:
+                optionSelected && question.answer == "b"
+                  ? "rgba(100, 221, 23, 0.62)"
+                  : optionSelected == "b"
+                  ? "rgba(244, 67, 54, 0.62)"
+                  : "rgba(244, 67, 54, 0)",
+            }}
+          >
             <View style={componentStyles.optionGradient}>
               <Text style={fontStyles.optionPos}>B</Text>
             </View>
             <Text style={fontStyles.optiontext}>{question.optionb} </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={componentStyles.optionButton}>
+          <TouchableOpacity
+            disabled={optionSelected}
+            onPress={() => {
+              markAnswer("c");
+            }}
+            style={{
+              ...componentStyles.optionButton,
+              borderRightWidth:
+                optionSelected == "c" || question.answer == "c" ? 10 : 0,
+
+              borderColor:
+                optionSelected && question.answer == "c"
+                  ? "rgba(100, 221, 23, 0.62)"
+                  : optionSelected == "c"
+                  ? "rgba(244, 67, 54, 0.62)"
+                  : "rgba(244, 67, 54, 0)",
+            }}
+          >
             <View style={componentStyles.optionGradient}>
               <Text style={fontStyles.optionPos}>C</Text>
             </View>
             <Text style={fontStyles.optiontext}>{question.optionc} </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            disabled={optionSelected}
+            onPress={() => {
+              markAnswer("d");
+            }}
             style={{
               ...componentStyles.optionButton,
-              backgroundColor: "#EF9A9A",
+              borderRightWidth:
+                optionSelected == "d" || question.answer == "d" ? 10 : 0,
+
+              borderColor:
+                optionSelected && question.answer == "d"
+                  ? "rgba(100, 221, 23, 0.62)"
+                  : optionSelected == "d"
+                  ? "rgba(244, 67, 54, 0.62)"
+                  : "rgba(244, 67, 54, 0)",
             }}
           >
             <View style={componentStyles.optionGradient}>
