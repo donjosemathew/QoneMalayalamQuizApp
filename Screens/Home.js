@@ -6,6 +6,7 @@ import {
   Text,
   View,
   StatusBar as StatusBar2,
+  Animated,
   SafeAreaView,
 } from "react-native";
 import CircularProgress from "react-native-circular-progress-indicator";
@@ -29,13 +30,57 @@ export default function HomeScreen({ navigation }) {
   ///timer to 15s
   ///load random question
   /////
+
+  const data = [
+    {
+      question: "ഭരണഘടന അനുവദിച്ചിരിക്കുന്ന മൗലികാവകാശങ്ങൾ എത്ര1",
+      optiona: "സിക്കിം",
+      optionb: "സിക്കിം",
+      optionc: "സിക്കിം",
+      optiond: "സിക്കിം",
+      answer: "a",
+    },
+    {
+      question: "ഭരണഘടന അനുവദിച്ചിരിക്കുന്ന മൗലികാവകാശങ്ങൾ എത്ര2",
+      optiona: "സിക്കിം",
+      optionb: "സിക്കിം",
+      optionc: "സിക്കിം",
+      optiond: "സിക്കിം",
+      answer: "a",
+    },
+    {
+      question: "ഭരണഘടന അനുവദിച്ചിരിക്കുന്ന മൗലികാവകാശങ്ങൾ എത്ര3",
+      optiona: "സിക്കിം",
+      optionb: "സിക്കിം",
+      optionc: "സിക്കിം",
+      optiond: "സിക്കിം",
+      answer: "a",
+    },
+    {
+      question: "ഭരണഘടന അനുവദിച്ചിരിക്കുന്ന മൗലികാവകാശങ്ങൾ എത്ര4",
+      optiona: "സിക്കിം",
+      optionb: "സിക്കിം",
+      optionc: "സിക്കിം",
+      optiond: "സിക്കിം",
+      answer: "a",
+    },
+    {
+      question: "ഭരണഘടന അനുവദിച്ചിരിക്കുന്ന മൗലികാവകാശങ്ങൾ എത്ര5",
+      optiona: "സിക്കിം",
+      optionb: "സിക്കിം",
+      optionc: "സിക്കിം",
+      optiond: "സിക്കിം",
+      answer: "a",
+    },
+  ];
+
   const [score, setScore] = useState(0);
-  const [timer, setTimer] = useState(15);
+
   const [life, setLife] = useState(5);
   const [newQues, setNewQues] = useState(0);
 
-  const [counter, setCounter] = useState(20);
-  const [startCountdown, setStartCountdown] = useState(false);
+  const [counter, setCounter] = useState(30); ///timer variable
+  const [startCountdown, setStartCountdown] = useState(false); //select reset
   useEffect(() => {
     if (startCountdown) {
       const timer =
@@ -51,10 +96,26 @@ export default function HomeScreen({ navigation }) {
       return () => clearInterval(timer);
     }
   }, [counter, startCountdown]);
+  ///////////////////////////////Get a question
+  const [question, setQuestion] = useState({});
+  const getaRandomQuestion = () => {
+    const number = Math.floor(Math.random() * data.length);
+    setQuestion(data[number]);
+  };
   const newQuestion = () => {
     console.log("sds");
-    setCounter(20);
+    getaRandomQuestion();
+    setCounter(33);
+
     setStartCountdown(true);
+  };
+  //////mark answer
+
+  const markAnswer = (value) => {
+    setStartCountdown(false);
+    console.log(value);
+    if (value == question.answer) {
+    }
   };
   return (
     <SafeAreaView
@@ -100,10 +161,10 @@ export default function HomeScreen({ navigation }) {
             <CircularProgress
               value={counter}
               radius={35}
-              duration={10}
-              progressValueColor={"#ecf0f1"}
-              maxValue={20}
-              activeStrokeSecondaryColor={"#C25AFF"}
+              duration={200}
+              maxValue={30}
+              activeStrokeColor={counter < 10 ? "#E53935" : "#66BB6A"}
+              activeStrokeSecondaryColor={counter < 10 ? "#FF5722" : "#66BB6A"}
               inActiveStrokeColor={"rgba(255, 255, 255, 0.64)"}
               titleColor={"white"}
               titleStyle={{ fontWeight: "bold" }}
@@ -146,34 +207,54 @@ export default function HomeScreen({ navigation }) {
             justifyContent: "center",
           }}
         >
-          <Text style={fontStyles.question}>
-            ഭരണഘടന അനുവദിച്ചിരിക്കുന്ന മൗലികാവകാശങ്ങൾ എത്ര{score}
-          </Text>
+          {question ? (
+            <Text style={fontStyles.question}>{question.question}</Text>
+          ) : (
+            ""
+          )}
         </View>
       </View>
-      <View style={componentStyles.page}>
-        <TouchableOpacity
-          onPress={newQuestion}
-          style={componentStyles.optionButton}
-        >
-          <View style={componentStyles.optionGradient}>
-            <Text style={fontStyles.optionPos}>A</Text>
-          </View>
-          <Text style={fontStyles.optiontext}>സിക്കിം </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={componentStyles.optionButton}>
-          <View style={componentStyles.optionGradient}>
-            <Text style={fontStyles.optionPos}>B</Text>
-          </View>
-          <Text style={fontStyles.optiontext}>സിക്കിം </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={componentStyles.optionButton}>
-          <View style={componentStyles.optionGradient}>
-            <Text style={fontStyles.optionPos}>C</Text>
-          </View>
-          <Text style={fontStyles.optiontext}>സിക്കിം </Text>
-        </TouchableOpacity>
-      </View>
+
+      {question ? (
+        <View style={componentStyles.page}>
+          <TouchableOpacity
+            onPress={() => {
+              markAnswer("a");
+            }}
+            style={componentStyles.optionButton}
+          >
+            <View style={componentStyles.optionGradient}>
+              <Text style={fontStyles.optionPos}>A</Text>
+            </View>
+            <Text style={fontStyles.optiontext}>{question.optiona} </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={componentStyles.optionButton}>
+            <View style={componentStyles.optionGradient}>
+              <Text style={fontStyles.optionPos}>B</Text>
+            </View>
+            <Text style={fontStyles.optiontext}>{question.optionb} </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={componentStyles.optionButton}>
+            <View style={componentStyles.optionGradient}>
+              <Text style={fontStyles.optionPos}>C</Text>
+            </View>
+            <Text style={fontStyles.optiontext}>{question.optionc} </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              ...componentStyles.optionButton,
+              backgroundColor: "#EF9A9A",
+            }}
+          >
+            <View style={componentStyles.optionGradient}>
+              <Text style={fontStyles.optionPos}>D</Text>
+            </View>
+            <Text style={fontStyles.optiontext}>{question.optiond} </Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        ""
+      )}
     </SafeAreaView>
   );
 }
