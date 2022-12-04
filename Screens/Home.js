@@ -19,6 +19,7 @@ import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { RFValue } from "react-native-responsive-fontsize";
 import LottieView from "lottie-react-native";
+import AfterAnswer from "./afterAnswer";
 export default function HomeScreen({ navigation }) {
   ///Move to home
   const backToHome = () => {
@@ -131,7 +132,7 @@ export default function HomeScreen({ navigation }) {
       style={{ flex: 1, alignItems: "center", backgroundColor: "#fff" }}
     >
       <StatusBar color="transparent" style="inverted" />
-
+      <AfterAnswer />
       <View
         style={{
           backgroundColor: "#5C62FB",
@@ -223,7 +224,8 @@ export default function HomeScreen({ navigation }) {
           )}
         </View>
       </View>
-      <View
+
+      {/* <View
         style={{
           position: "absolute",
           zIndex: 100,
@@ -241,7 +243,7 @@ export default function HomeScreen({ navigation }) {
           // Find more Lottie files at https://lottiefiles.com/featured
           source={require("../assets/layer.json")}
         />
-      </View>
+      </View> */}
       {question ? (
         <View style={componentStyles.page}>
           <TouchableOpacity
@@ -336,6 +338,26 @@ export default function HomeScreen({ navigation }) {
             </View>
             <Text style={fontStyles.optiontext}>{question.optiond} </Text>
           </TouchableOpacity>
+          <View
+            style={{
+              backgroundColor: "#5C62FB",
+              width: 60,
+              marginTop: 50,
+              height: 60,
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 30,
+              alignSelf: "center",
+            }}
+          >
+            <Icon
+              solid
+              name="arrow-forward-outline"
+              type="ionicon"
+              color="#fff"
+              size={50}
+            />
+          </View>
         </View>
       ) : (
         ""
