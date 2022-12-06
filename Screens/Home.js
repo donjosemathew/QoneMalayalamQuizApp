@@ -9,6 +9,8 @@ import {
   Animated,
   SafeAreaView,
 } from "react-native";
+import React from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import CircularProgress from "react-native-circular-progress-indicator";
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
@@ -22,6 +24,7 @@ import LottieView from "lottie-react-native";
 import AfterAnswer from "./afterAnswer";
 export default function HomeScreen({ navigation }) {
   ///Move to home
+  const { goBack } = navigation;
   const backToHome = () => {
     navigation.navigate("Dashboard");
   };
@@ -122,17 +125,23 @@ export default function HomeScreen({ navigation }) {
   };
 
   ////Load question initially
-  useEffect(() => {
-    newQuestion();
-  }, []);
-
+  // useEffect(() => {
+  //   console.log("sdssdsd");
+  //   newQuestion();
+  // }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      newQuestion();
+      return () => null;
+    }, [])
+  );
   const animation = useRef(null);
   return (
     <SafeAreaView
       style={{ flex: 1, alignItems: "center", backgroundColor: "#fff" }}
     >
       <StatusBar color="transparent" style="inverted" />
-      <AfterAnswer />
+      <AfterAnswer newQuestion={newQuestion} backToHome={backToHome} />
       <View
         style={{
           backgroundColor: "#5C62FB",

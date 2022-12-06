@@ -1,32 +1,56 @@
-import { View, Dimensions, StatusBar, Text } from "react-native";
+import {
+  View,
+  Dimensions,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import LottieView from "lottie-react-native";
 import { Icon } from "react-native-elements";
 import { RFValue } from "react-native-responsive-fontsize";
+import { useRef } from "react";
 
-export default function AfterAnswer() {
+export default function AfterAnswer({ newQuestion, backToHome }) {
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
+  const animation = useRef(null);
+
   return (
     <View
       style={{
         position: "absolute",
         zIndex: 100,
         width: windowWidth,
-        height: windowHeight * 0.2,
 
-        paddingBottom: 0,
+        paddingBottom: 9,
         bottom: 0,
       }}
     >
       <View
         style={{
-          backgroundColor: "#fff",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <LottieView
+          autoPlay
+          ref={animation}
+          style={{
+            width: 200,
+            height: 200,
+            backgroundColor: "#F4433600",
+          }}
+          // Find more Lottie files at https://lottiefiles.com/featured
+          source={require("../assets/layer.json")}
+        />
+      </View>
+      <View
+        style={{
+          backgroundColor: "#FAFAFA",
           padding: 10,
-          shadowColor: "rgba(92, 98, 251, 0.96)",
+          // shadowColor: "rgba(#424242, 0.96)",
           flex: 1,
           alignItems: "center",
-          elevation: 18,
-          borderTopRightRadius: 26,
-          borderTopLeftRadius: 26,
         }}
       >
         <Text
@@ -36,33 +60,50 @@ export default function AfterAnswer() {
             marginTop: 5,
           }}
         >
-          Next Question
+          Nexts Question
         </Text>
         <View
           style={{
             flexDirection: "row",
-            marginTop: 2,
+            marginTop: 6,
           }}
         >
-          <View
+          <TouchableOpacity
+            onPress={newQuestion}
             style={{
-              backgroundColor: "blue",
-              padding: 10,
               borderRadius: 30,
               width: 60,
-
+              alignItems: "center",
+              justifyContent: "center",
               height: 60,
+              borderWidth: 2,
+              borderColor: "#eeeeee",
             }}
           >
             <Icon
               solid
               name="arrow-forward-outline"
               type="ionicon"
-              color="red"
-              size={50}
+              color="#00c853"
+              size={40}
             />
-          </View>
-          <Icon solid name="close" type="ionicon" color="red" size={50} />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={backToHome}
+            style={{
+              borderRadius: 30,
+              width: 60,
+              alignItems: "center",
+              justifyContent: "center",
+              height: 60,
+              marginLeft: 60,
+              borderWidth: 2,
+              borderColor: "#eeeeee",
+            }}
+          >
+            <Icon solid name="close" type="ionicon" color="#e57373" size={40} />
+          </TouchableOpacity>
         </View>
       </View>
     </View>
